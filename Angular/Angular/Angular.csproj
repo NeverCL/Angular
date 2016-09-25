@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="hello.html" />
+    <Content Include="index.html" />
+    <Content Include="index2.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
