@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>AngularJS</title>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
+</head>
+<body>
+    <a href="#index">index</a>
+    <a href="#home">home</a>
+    <div ng-view></div>
+    <script>
+        angular.module('myApp', ['ngRoute'], ['$routeProvider', function ($route) {
+            $route.when('/index', { template: 'Index' })
+                .when('/home', {
+                    template: 'Home', resolve: {
+                        function($q, $timeout) {
+                            var delay = $q.defer();
+                            $timeout(delay.resolve, 1000);
+                            return delay.promise;
+                        }
+                    }
+                })
+                .otherwise('index');
+        }]);
+    </script>
+</body>
+</html>
