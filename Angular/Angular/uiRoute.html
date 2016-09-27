@@ -16,7 +16,7 @@
     <a ui-sref="about" ui-sref-active="active">About</a>
     <div ui-view></div>
     <script>
-        angular.module('myApp', ['ui.router'], ['$stateProvider', function ($stateProvider) {
+        angular.module('myApp', ['ui.router'], ['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var helloState = {
                 name: 'hello',
                 url: '/hello',
@@ -28,7 +28,7 @@
                 url: '/about',
                 template: '<h3>Its the UI-Router hello world app!</h3>'
             }
-
+            $urlRouterProvider.otherwise('hello');//url
             $stateProvider.state(helloState).state(aboutState);
         }]);
     </script>

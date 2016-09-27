@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.min.js"></script>
+</head>
+<body>
+    <h1>深度路由</h1>
+    <div ui-view></div>
+    <script>
+        angular.module('myApp', ['ui.router'], ['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+            $stateProvider.state("PageTab", {
+                url: "/PageTab",
+                template: '<span style="width:100px" ui-sref=".Page1"><a href="#">Page-1</a></span><span style="width:100px" ui-sref=".Page2"><a href="#">Page-2</a></span><span style="width:100px" ui-sref=".Page3"><a href="#">Page-3</a></span> <div ui-view/>'
+            })
+            .state("PageTab.Page1", {
+                url: "/Page1",
+                template: "Page-1"
+            })
+            .state("PageTab.Page2", {
+                url: "/Page2",
+                template: "Page-2"
+            })
+            .state("PageTab.Page3", {
+                url: "/Page3",
+                template: "Page3"
+            });
+            $urlRouterProvider.otherwise('PageTab');
+        }]);
+    </script>
+</body>
+</html>
