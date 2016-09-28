@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>directive-UI-pager</title>
+    <meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body ng-app="ui.bootstrap.demo">
+    <div ng-controller="PaginationDemoCtrl">
+        <h6><code>rotate</code> defaulted to <code>true</code> and <code>force-ellipses</code> set to <code>true</code>:</h6>
+        <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+    </div>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script>
+        angular.module('ui.bootstrap.demo', ['ui.bootstrap']).controller('PaginationDemoCtrl', function ($scope, $log) {
+            $scope.totalItems = 1000;
+            $scope.currentPage = 4;
+            $scope.maxSize = 5;//显示分页码个数
+            $scope.itemsPerPage = 20;//每页大小
+
+            $scope.setPage = function (pageNo) {
+                $scope.currentPage = pageNo;
+            };
+
+            $scope.pageChanged = function () {
+                $log.log('Page changed to: ' + $scope.currentPage);
+            };
+        });
+    </script>
+</body>
+</html>

@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="start.html" />
+    <Content Include="ui-pager.html" />
     <Content Include="uiRoute.html" />
     <Content Include="uiRoute-Example.html" />
     <Content Include="validate-message.html" />
