@@ -4,23 +4,23 @@
     <title>Validate</title>
     <meta charset="utf-8" />
     <script src="Scripts/angular.min.js"></script>
-    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!--<form name="userForm" novalidate>
-        <input type="text" required />
-        <input type="text" minlength="10" value="{{userForm.$invalid}}" />
-        <input type="text" maxlength="10" value="{{userForm.$valid}}" />
-        <input type="text" value="" pattern="" />
-        <input type="email" value="" />
-        <input type="number" value="" />
-        <input type="url" value="" />
-        <button type="submit" ng-disabled="!userForm.$invalid">提交</button>
-    </form>-->
-
-    <form name="form1" novalidate>
-        <input type="text" name="user" required />
-        <button type="submit" ng-disabled="form1.$invalid">提交</button>
+    <form name="form" novalidate ng-app>
+        <span>{{form.$invalid}}</span>
+        <span>{{form.$valid}}</span>
+        <span>{{form.$dirty}}</span>
+        <span>{{form.$pristine}}</span>
+        <input type="text" ng-model="user" required />
+        <input type="text" ng-model="pwd" required minlength="4" maxlength="5" />
+        <input type="text" ng-model="phone" required ng-pattern="/1[3|5|7|8|][0-9]{9}/" />
+        <input type="email" ng-model="email" required />
+        <input type="url" ng-model="url" required />
+        <input type="number" ng-model="number" required />
+        <div>
+            <button type="reset" ng-disabled="form.$pristine">重置</button>
+            <button type="submit" ng-disabled="form.$invalid">提交</button>
+        </div>
     </form>
 </body>
 </html>
