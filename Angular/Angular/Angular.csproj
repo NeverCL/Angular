@@ -64,7 +64,9 @@
     <Content Include="index.html" />
     <Content Include="index2.html" />
     <Content Include="ngRoute.html" />
-    <Content Include="ngRouteExample.html" />
+    <Content Include="ngRoute-Example.html" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-messages.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -76,6 +78,7 @@
     <Content Include="packages.config" />
     <Content Include="README.MD" />
     <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -86,7 +89,8 @@
   <ItemGroup>
     <Content Include="start.html" />
     <Content Include="uiRoute.html" />
-    <Content Include="uiRouteExample.html" />
+    <Content Include="uiRoute-Example.html" />
+    <Content Include="validate-message.html" />
     <Content Include="validate.html" />
     <Content Include="Web.config" />
   </ItemGroup>

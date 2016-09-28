@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-messages.min.js"></script>
+</head>
+<body>
+    <form name="form" ng-app="myApp" novalidate>
+        <input type="email" ng-model="user" name="username" required ensure-unique minlength="4" />
+        <div ng-messages="form.username.$error" ng-messages-multiple>
+            <div ng-message="required">该项必填</div>
+            <div ng-message="minlength">低于最低长度</div>
+            <div ng-message="email">应为email</div>
+            <div ng-message="unique">用户名已存在</div>
+        </div>
+    </form>
+    <script>
+        angular.module('myApp', ['ngMessages']).directive('ensureUnique', ['$http', '$timeout', '$window', function ($http, $timeout, $window) {
+            return {
+                restrict: "A",
+                require: 'ngModel',
+                link: function (scope, ele, attrs, ngModelController) {
+                    scope.$watch(attrs.ngModel, function (n) {
+                        if (!n) return;
+                        $timeout.cancel($window.timer);
+                        $window.timer = $timeout(function () {
+                            $http({
+                                method: 'get',
+                                url: '/api/checkusername/', //根据换成自己的url
+                                params: {
+                                    "username": n
+                                }
+                            }).success(function (data) {
+                                ngModelController.$setValidity('unique', data.isUnique); //这个取决于你返回的，其实就是返回一个是否正确的字段，具体的这块可以自己修改根据自己的项目
+                            }).error(function (data) {
+                                ngModelController.$setValidity('unique', false);
+                            });
+                        }, 500);
+                    });
+                }
+            };
+        }]);
+    </script>
+</body>
+</html>
