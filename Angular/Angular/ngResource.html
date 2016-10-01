@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="helloCtrl">
+    <div>{{data|json}}</div>
+    <div>{{obj|json}}</div>
+    <script>
+        angular.module('myApp', ['ngResource']).
+            config(['resourceProvider', function ($resourceProvider) {
+                $resourceProvider.defaults.actions.update = {
+                    method: 'PUT'
+                };
+            }]).factory('UserCard', ['$resource', function ($resource) {
+                return $resource('/data.ashx',
+                    null,
+                    { charge: { method: 'post', params: { charge: true }, isArray: false } });
+            }])
+            .controller('helloCtrl', ['UserCard', '$scope', function (userCard, $scope) {
+                var data = userCard.query();
+
+                var obj = userCard.get({ id: 1 });
+
+                var card = {};
+                userCard.save({ id: 1 }, card);
+                userCard.save({}, card);
+
+                $scope.obj = obj;
+                $scope.data = data;
+            }]);
+    </script>
+</body>
+</html>
