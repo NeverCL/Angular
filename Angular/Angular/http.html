@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="helloCtrl">
+    <script>
+        angular.module('myApp', [], function ($httpProvider) {
+            //为所有请求设置Auth头
+            $httpProvider.defaults.headers.common['Authorization'] = 'Bearer xx';
+            //为所有GET请求设置DO NOT TRACK(默认情况下 get不在defaultheaders里)
+            $httpProvider.defaults.headers.get = $httpProvider.defaults.headers.get || {};
+            $httpProvider.defaults.headers.get['DNT'] = '1';
+        }).controller('helloCtrl', ['$http', function (http) {
+            var url = '/index.html';
+
+            http.get(url)
+                .success(function (data, status, headers, config) {
+                    console.log('请求内容:' + data);
+                }).error(function (data) {
+                    console.warn('请求错误:' + data);
+                });
+
+            http.get(url)
+                .then(function (rsp) {
+                    debugger;
+                    console.log('请求内容:' + rsp.data);
+                }, function (rsp) {
+                    console.warn('请求错误:' + rsp.data);
+                });
+        }]);
+    </script>
+</body>
+</html>
