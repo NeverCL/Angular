@@ -73,6 +73,7 @@
     <Content Include="ngAnimate-JS.html" />
     <Content Include="ngAnimate-Css.html" />
     <Content Include="ngResource.html" />
+    <Content Include="promise.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-resource.js" />
