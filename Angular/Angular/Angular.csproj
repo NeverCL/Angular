@@ -69,6 +69,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="directive.html" />
     <Content Include="http.html" />
     <Content Include="ngAnimate-JS.html" />
     <Content Include="ngAnimate-Css.html" />

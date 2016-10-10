@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>directive-according</title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.js"></script>
+</head>
+<body ng-app="myApp" ng-init="items=[{title:'t1',text:'x1'},{title:'t2',text:'x2'},{title:'t3',text:'x3'}]">
+    <div hello>
+        <div>
+            <div word title="item.title" ng-repeat="item in items">{{item.text}}</div>
+        </div>
+    </div>
+    <script>
+        angular.module('myApp', [])
+            .directive('hello', [
+                function () {
+                    return {
+                        scope: {
+                            title: '='
+                        },
+                        transclude: true,
+                        replace: true,
+                        controller: function () {
+                            var words = [];
+                            this.add = function (word) {
+                                words.push(word);
+                            }
+                            this.openOne = function (word) {
+                                for (var i = 0; i < words.length; i++) {
+                                    if (words[i] !== word)
+                                        words[i].show = false;
+                                }
+                            }
+                        },
+                        template: '<div ng-transclude></div>'
+                    }
+                }
+            ])
+            .directive('word', [
+                function () {
+                    return {
+                        require: '?^hello',
+                        scope: {
+                            title: '='
+                        },
+                        transclude: true,
+                        replace: true,
+                        template: '<div><div ng-click="toggle()">{{title}}</div><div ng-show="show" ng-transclude></div></div>',
+                        link: function (scope, ele, attr, ctrl) {
+                            if (!ctrl) {
+                                console.warn('无hello指令');
+                                return;
+                            }
+                            scope.show = false;
+                            ctrl.add(scope);
+                            scope.toggle = function () {
+                                scope.show = !scope.show;
+                                ctrl.openOne(scope);
+                            }
+                        }
+                    }
+                }
+            ]);
+    </script>
+</body>
+</html>
