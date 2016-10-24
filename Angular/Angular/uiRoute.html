@@ -11,7 +11,7 @@
         }
     </style>
 </head>
-<body>
+<body ng-controller="homeCtrl">
     <a ui-sref="hello" ui-sref-active="active">Hello</a>
     <a ui-sref="about" ui-sref-active="active">About</a>
     <div ui-view></div>
@@ -28,9 +28,12 @@
                 url: '/about',
                 template: '<h3>Its the UI-Router hello world app!</h3>'
             }
-            $urlRouterProvider.otherwise('hello');//url
+            //$urlRouterProvider.otherwise('hello');//默认跳转
             $stateProvider.state(helloState).state(aboutState);
-        }]);
+        }]).controller('homeCtrl', function ($state) {
+            //手动跳转
+            $state.go('hello', { id: 1 }, options);
+        });
     </script>
 </body>
 </html>
