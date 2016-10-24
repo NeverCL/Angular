@@ -4,12 +4,14 @@
     <title></title>
     <meta charset="utf-8" />
     <script src="Scripts/angular.js"></script>
+    <script src="Scripts/jquery-1.9.1.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="helloCtrl">
     <h1>{{msg}}</h1>
     <input type="checkbox" ng-model="flag" />
     <button ng-click="func1()">Test</button>
     <button ng-click="func2()">Test2</button>
+    <button ng-click="func3()">Test3</button>
     <script>
         angular.module('myApp', []).controller('helloCtrl', ['$scope', '$q', '$timeout', function (scope, q, $timeout) {
             scope.func1 = function () {
@@ -48,6 +50,29 @@
                 defer.notify('开始执行');
                 scope.flag ? defer.resolve('选中') : defer.reject('未选中');
             }
+
+
+            function getUser() {
+                var defer = q.defer();
+                setTimeout(function () {
+                    $.ajax({
+                        url: '/hello.html',
+                        complete: function() {
+                            var user = { name: '123' };
+                            defer.resolve(user);
+                        }
+                    });
+                }, 1000);
+                return defer.promise;
+            }
+
+            scope.func3 = function () {
+                getUser().then(function (user) {
+                    console.log(user);
+                });
+            }
+
+            scope.func3();
 
         }]);
     </script>
